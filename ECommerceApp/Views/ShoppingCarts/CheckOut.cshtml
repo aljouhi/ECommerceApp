@@ -1,0 +1,73 @@
+﻿@model IEnumerable<ECommerceApp.Models.ShoppingCart>
+
+@{
+    ViewBag.Title = "Shopping Cart";
+}
+
+<h2>Periksa dan Kirim belanjaan Anda</h2>
+<br />
+@Html.Raw(ViewBag.Pesan)
+        <div class="col-md-12">
+            <table class="table table-bordered">
+                <tr>
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.CartID)
+                        </th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.Book.CoverImage)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Book.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Quantity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Book.Price)
+                    </th>
+                    <th>
+                        Subtotal
+                    </th>
+                </tr>
+                @{decimal gtotal = 0;}
+                @foreach (var item in Model)
+                {
+                    var price = string.Format("{0:N0}", item.Book.Price);
+                    var subtotal = item.Quantity * item.Book.Price;
+                    gtotal += subtotal;
+                    <tr>
+                        <td>
+                            <img height="250" width="150" src="~/Content/Image/@item.Book.CoverImage" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Book.Title)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+                        <td class="text-right">
+                            Rp. &nbsp; @price
+                        </td>
+                        <td class="text-right">
+                             Rp. &nbsp; @string.Format("{0:N0}", subtotal)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <br />
+        <br />
+        <div class="col-md-8">
+            <p>
+                @Html.ActionLink("Submit", "OrderSkrg", "Order")
+            </p>
+        </div>
+        <div class="col-md-4">
+             <p class="text-right">
+             <strong>
+                Grand total: Rp. &nbsp; @string.Format("{0:N0}", gtotal)
+            </strong>
+             </p>
+        </div>
+
+

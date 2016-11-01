@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ECommerceApp.Models.Category>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Category List</h2><br />
+@Html.Raw(ViewBag.Pesan)
+<br />
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            @using (Html.BeginForm("Search", "Categories", FormMethod.Post, new { @class = "form-inline" }))
+            {
+                @*<label for="ddSearch">Pilih Kriteria</label>
+                <select name="selectKriteria">
+                    <option value="Name" selected="selected">Nama Kategori</option>
+ 
+                </select>
+                <input type="text" name="txtSearch" class="form-control" />
+                <button type="submit" class="btn btn-success">Cari</button>*@
+
+                <label for="ddSearch">Pilih Kriteria</label>
+                <select name="selectKriteria">
+                    <option value="Nama" selected="selected">Nama</option>
+                </select>
+                <input type="text" name="txtSearch" class="form-control" />
+                <button type="submit" class="btn btn-success">Cari</button>
+            }
+        </div>
+    </div>
+</div>
+
+        @Html.ActionLink("Create Category", "Create", "CategoriesController", new { @class = "btn btn-success" })<br /><br />
+
+        <table class="table table-striped">
+            <tr>
+                <th>ID</th>
+                <th>Category Name</th>
+                <th></th>
+                <th></th>
+            </tr>
+            @foreach (var cat in Model)
+            {
+                <tr>
+                    <td>@cat.CategoryID</td>
+                    <td>@cat.CategoryName</td>
+                    <td>@Html.ActionLink("Edit", "Edit", new { id = cat.CategoryID })</td>
+                    <td>
+                        @Html.ActionLink("Delete", "Delete", new { id = cat.CategoryID },
+            htmlAttributes: new { onclick = "return confirm('Apakah anda yakin menghapus?')" })
+                    </td>
+                </tr>
+            }
+        </table>

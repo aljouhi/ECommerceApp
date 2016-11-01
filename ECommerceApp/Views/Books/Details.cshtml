@@ -1,0 +1,84 @@
+﻿@model ECommerceApp.ViewModels.BookVM
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div class="container">
+    <div class="row">
+        <h4>BookVM</h4>
+        <hr />
+        <div class="col-md-3">
+            <img height="250" width="150" src="~/Content/Image/@Model.CoverImage" />
+        </div>
+        <div class="col-md-9">
+            <dl class="dl-horizontal">
+
+                <dt></dt>
+                <dd><br /></dd>
+                <dd><br /></dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Title)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Title)
+                </dd>
+
+                <dt> Pengarang </dt>
+                <dd>@Model.FirstName&nbsp;@Model.LastName</dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PublicationDate)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PublicationDate)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ISBN)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ISBN)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Price)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Price)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Publisher)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Publisher)
+                </dd>
+                <dt>&nbsp;</dt>
+                <dd><a href="~/ShoppingCarts/AddToCart/@Model.BookID" class="btn btn-success">Add To Cart</a></dd>
+            </dl>
+
+        </div>
+    </div>
+</div>
+<div>
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        @Html.ActionLink("Back to List", "Index")
+</div>
+    
+

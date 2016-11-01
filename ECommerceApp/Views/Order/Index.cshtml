@@ -1,0 +1,58 @@
+﻿@model IEnumerable<ECommerceApp.ViewModels.OrderVM>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Terima Kasih telah berbelanja</h2>
+<br />
+@{var a = "";}
+@{var c = 0;}
+@foreach (var u in Model)
+{
+    c = u.OrderID;
+    a = u.CustomerName;
+}
+<h4> ID Order: &nbsp; <strong>@c</strong></h4>
+<h4> Customer Email: &nbsp; <strong>@string.Format(a)</strong></h4>
+<table class="table table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            Subtotal
+        </th>
+    </tr>
+@{decimal gtotal = 0;}
+@foreach (var item in Model) {
+    var subtotal = item.Quantity * item.Price;
+    gtotal += subtotal;
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td class="text-center">
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td class="text-right">
+            Rp. &nbsp; @string.Format("{0:N0}", item.Price)
+        </td>
+        <td class="text-right">
+            Rp. &nbsp; @string.Format("{0:N0}", subtotal)
+        </td>
+    </tr>
+}
+</table>
+<div class="col-md-12">
+    <p class="text-right">
+        Grand total: Rp. &nbsp; @string.Format("{0:N0}", gtotal)
+    </p> 
+</div>
+      

@@ -1,0 +1,121 @@
+﻿@model IEnumerable<ECommerceApp.ViewModels.BookVM>
+
+@{
+    ViewBag.Title = "ViewAllBooks";
+}
+
+<h2>ViewAllBooks</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <p>
+                @Html.Raw(ViewBag.Pesan)
+            </p>
+            <p>
+                @Html.ActionLink("Create New", "Create", "BooksController", new { @class = "btn btn-default" })
+            </p>
+        </div>
+        <div class="col-md-6">
+            @using (Html.BeginForm("Search", "Books", FormMethod.Post, new { @class = "form-inline" }))
+            {
+                <label for="ddSearch">Pilih Kriteria</label>
+                <select name="selectKriteria">
+                    <option value="Title" selected="selected">Judul</option>
+                    <option value="Author">Pengarang</option>
+                </select>
+                <input type="text" name="txtSearch" class="form-control" />
+                <button type="submit" class="btn btn-success">Cari</button>
+            }
+        </div>
+    </div>
+</div>
+
+<br />
+<hr />
+@foreach (var item in Model)
+{
+    <div class="col-md-6" style="padding-bottom: 30px">
+        <div class="thumbnail">
+
+            <div class="caption">
+                <table>
+                    <tr>
+                        <td rowspan="9">
+                            <img align="middle" width="150" height="260" src="~/Content/Image/@item.CoverImage" />
+                        </td>
+                        <td rowspan="9">
+                            &nbsp; &nbsp; &nbsp; &nbsp;
+                        </td>
+                        <td>
+                            Judul
+                        </td>
+                        <td>
+                            <h4>: &nbsp;<strong>@Html.DisplayFor(modelItem => item.Title)</strong> </h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Harga</td>
+                        <td><h4>: &nbsp;Rp. &nbsp;<strong>@string.Format("{0:N0}", item.Price)</strong></h4></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Author ID
+                        </td>
+                        <td>
+                            <h5>: &nbsp;@Html.DisplayFor(modelItem => item.AuthorID)</h5>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Category ID
+                        </td>
+                        <td>
+                            <h5>: &nbsp;@Html.DisplayFor(modelItem => item.CategoryID)</h5>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Publication Date
+                        </td>
+                        <td>
+                            <h5>: &nbsp;@Html.DisplayFor(modelItem => item.PublicationDate)</h5>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            ISBN
+                        </td>
+                        <td>
+                            <h5>: &nbsp;@Html.DisplayFor(modelItem => item.ISBN)</h5>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Publisher
+                        </td>
+                        <td>
+                            <h5>: &nbsp;@Html.DisplayFor(modelItem => item.Publisher)</h5>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Description
+                        </td>
+                        <td>
+                            <h5>: &nbsp;@Html.DisplayFor(modelItem => item.Description)</h5>
+                        </td>
+                    </tr>
+                </table>
+                <div class="pull-right">
+                    @Html.ActionLink("Edit", "Edit", new { id = item.BookID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.BookID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.BookID })
+                </div>
+                <br />
+                <div>
+                    <a href="~/ShoppingCarts/AddToCart/@item.BookID" class="btn btn-default">Add To Cart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
